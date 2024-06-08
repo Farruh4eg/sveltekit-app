@@ -31,11 +31,15 @@ export const POST: RequestHandler = async ({ request }) => {
 				select: {
 					username: true,
 					id: true,
-					role: true
+					Role: {
+						select: {
+							role: true
+						}
+					}
 				}
 			});
 
-			return new Response(JSON.stringify({ user, role: user?.role }), {
+			return new Response(JSON.stringify({ user, role: user?.Role.role }), {
 				status: 200,
 				headers: {
 					'Content-Type': 'application/json'
